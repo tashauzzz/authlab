@@ -1,0 +1,12 @@
+{"ts": "2025-10-25T18:05:21.086199Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_auth", "reason": "dev_api_key", "route": "/api/v1/auth/session", "meta": null}
+{"ts": "2025-10-25T18:05:21.086345Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_session", "reason": "ok", "route": "/api/v1/auth/session", "meta": null}
+{"ts": "2025-10-25T18:05:36.999070Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_auth", "reason": "dev_api_key", "route": "/api/v1/notes", "meta": null}
+{"ts": "2025-10-25T18:05:36.999475Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_notes", "reason": "list", "route": "/api/v1/notes", "meta": {"user": "admin", "sort": "title:asc", "limit": 1, "offset": 0, "count": 1, "total": 3}}
+{"ts": "2025-10-25T18:10:25.711368Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_auth", "reason": "dev_api_key", "route": "/api/v1/notes", "meta": null}
+{"ts": "2025-10-25T18:10:25.711740Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_notes", "reason": "list", "route": "/api/v1/notes", "meta": {"user": "admin", "sort": "title:asc", "limit": 1, "offset": 1, "count": 1, "total": 3}}
+{"ts": "2025-10-25T18:12:55.174811Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_auth", "reason": "dev_api_key", "route": "/api/v1/notes/1", "meta": null}
+{"ts": "2025-10-25T18:12:55.175136Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_notes", "reason": "detail_ok", "route": "/api/v1/notes/1", "meta": {"note_id": 1}}
+{"ts": "2025-10-25T18:15:14.390788Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_auth", "reason": "dev_api_key", "route": "/api/v1/notes/4", "meta": null}
+{"ts": "2025-10-25T18:15:14.391215Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_notes", "reason": "detail_masked_404", "route": "/api/v1/notes/4", "meta": {"note_id": 4}}
+{"ts": "2025-10-25T18:17:57.181022Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_auth", "reason": "dev_api_key", "route": "/api/v1/notes/999999", "meta": null}
+{"ts": "2025-10-25T18:17:57.181347Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_notes", "reason": "detail_masked_404", "route": "/api/v1/notes/999999", "meta": {"note_id": 999999}}

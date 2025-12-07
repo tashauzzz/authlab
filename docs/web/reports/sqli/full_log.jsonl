@@ -1,0 +1,8 @@
+{"ts": "2025-10-14T20:13:21.024914Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "mfa_required", "reason": "-", "route": "/login", "meta": null}
+{"ts": "2025-10-14T20:13:43.644840Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "success", "reason": "mfa_ok", "route": "/mfa", "meta": null}
+{"ts": "2025-10-14T20:13:46.595829Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "sqli_surface", "reason": "concat_raw", "route": "/products", "meta": {"q": ""}}
+{"ts": "2025-10-14T20:13:57.310300Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "sqli_surface", "reason": "concat_raw", "route": "/products", "meta": {"q": "' OR 1=1--"}}
+{"ts": "2025-10-14T20:25:15.865251Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "mfa_required", "reason": "-", "route": "/login", "meta": null}
+{"ts": "2025-10-14T20:25:29.634208Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "success", "reason": "mfa_ok", "route": "/mfa", "meta": null}
+{"ts": "2025-10-14T20:25:42.294314Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "sqli_surface", "reason": "param_safe", "route": "/products", "meta": {"q": ""}}
+{"ts": "2025-10-14T20:26:20.688876Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "sqli_surface", "reason": "param_safe", "route": "/products", "meta": {"q": "' OR 1=1--"}}

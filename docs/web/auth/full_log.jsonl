@@ -1,0 +1,50 @@
+{"ts": "2025-11-12T21:51:16.633803Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "mfa_required", "reason": "-", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:01:06.784420Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "mfa_required", "reason": "-", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:10:57.558136Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "mfa_required", "reason": "-", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:11:12.965765Z", "ip": "127.0.0.1", "username": "admin", "user_exists": false, "result": "invalid", "reason": "csrf_bad", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:25:00.714129Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "bad_password", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:25:42.612408Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "bad_password", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:25:42.825781Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "bad_password", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:25:43.248081Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "bad_password", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:25:43.467278Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "bad_password", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:25:43.594959Z", "ip": "127.0.0.1", "username": "admin", "user_exists": false, "result": "invalid", "reason": "rate_limited", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:31:12.973372Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "bad_password", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:31:13.674499Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "bad_password", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:31:14.722431Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "bad_password", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:31:15.243236Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "bad_password", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:31:15.739549Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "bad_password", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:31:16.165081Z", "ip": "127.0.0.1", "username": "admin", "user_exists": false, "result": "invalid", "reason": "rate_limited", "route": "/login", "meta": null}
+{"ts": "2025-11-12T22:42:29.146643Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "success", "reason": "mfa_ok", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:42:47.107629Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "success", "reason": "mfa_ok", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:49:27.845803Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "mfa_bad", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:18.076577Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "mfa_bad", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:18.519268Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "mfa_bad", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:18.938791Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "mfa_bad", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:19.566209Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "mfa_bad", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:20.109277Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "rate_limited", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:23.390958Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "rate_limited", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:23.621995Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "rate_limited", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:23.863853Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "rate_limited", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:24.069112Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "rate_limited", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:24.301030Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "rate_limited", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:24.795454Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "rate_limited", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:25.026796Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "rate_limited", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:25.473799Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "rate_limited", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:31.763578Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "mfa_bad", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:32.003570Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "mfa_bad", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:32.233154Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "mfa_bad", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:32.444966Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "mfa_bad", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:32.665970Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "mfa_bad", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:33.238129Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "rate_limited", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:50:33.458961Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "rate_limited", "route": "/mfa", "meta": null}
+{"ts": "2025-11-12T22:56:39.790336Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "xss_surface", "reason": "stored_safe", "route": "/guestbook", "meta": {"count": 4}}
+{"ts": "2025-11-12T22:56:46.602666Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "xss_surface", "reason": "stored_raw", "route": "/guestbook", "meta": {"len": 5}}
+{"ts": "2025-11-12T22:56:46.626230Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "xss_surface", "reason": "stored_safe", "route": "/guestbook", "meta": {"count": 5}}
+{"ts": "2025-11-12T22:57:11.518416Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "xss_surface", "reason": "stored_raw", "route": "/guestbook", "meta": {"len": 5}}
+{"ts": "2025-11-12T23:05:27.362667Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "csrf_bad", "route": "/guestbook", "meta": null}
+{"ts": "2025-11-12T23:12:42.851035Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "logout", "reason": "ok", "route": "/logout", "meta": null}
+{"ts": "2025-11-12T23:13:32.925139Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "logout", "reason": "ok", "route": "/logout", "meta": null}
+{"ts": "2025-11-12T23:17:43.159065Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "logout", "reason": "ok", "route": "/logout", "meta": null}
+{"ts": "2025-11-12T23:17:47.542325Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "csrf_bad", "route": "/logout", "meta": null}
+{"ts": "2025-11-12T23:19:21.524244Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "csrf_bad", "route": "/logout", "meta": null}
+{"ts": "2025-11-12T23:19:33.266380Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "invalid", "reason": "csrf_bad", "route": "/logout", "meta": null}

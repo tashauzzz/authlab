@@ -1,0 +1,10 @@
+{"ts": "2025-10-15T15:51:13.429622Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "mfa_required", "reason": "-", "route": "/login", "meta": null}
+{"ts": "2025-10-15T15:51:25.085390Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "success", "reason": "mfa_ok", "route": "/mfa", "meta": null}
+{"ts": "2025-10-15T15:51:30.353232Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "xss_surface", "reason": "stored_poc", "route": "/guestbook", "meta": {"count": 0}}
+{"ts": "2025-10-15T15:52:02.606025Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "xss_surface", "reason": "stored_raw", "route": "/guestbook", "meta": {"len": 28}}
+{"ts": "2025-10-15T15:52:02.611739Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "xss_surface", "reason": "stored_poc", "route": "/guestbook", "meta": {"count": 1}}
+{"ts": "2025-10-15T15:53:04.423420Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "mfa_required", "reason": "-", "route": "/login", "meta": null}
+{"ts": "2025-10-15T15:53:16.885697Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "success", "reason": "mfa_ok", "route": "/mfa", "meta": null}
+{"ts": "2025-10-15T15:53:22.399492Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "xss_surface", "reason": "stored_safe", "route": "/guestbook", "meta": {"count": 0}}
+{"ts": "2025-10-15T15:53:38.312202Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "xss_surface", "reason": "stored_raw", "route": "/guestbook", "meta": {"len": 28}}
+{"ts": "2025-10-15T15:53:38.315974Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "xss_surface", "reason": "stored_safe", "route": "/guestbook", "meta": {"count": 1}}

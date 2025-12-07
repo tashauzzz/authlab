@@ -1,0 +1,28 @@
+{
+  "count": 4,
+  "items": [
+    {
+      "id": 7,
+      "name": "Laptop Gamer 15",
+      "price": 1499.0
+    },
+    {
+      "id": 1,
+      "name": "Laptop Go 12",
+      "price": 799.0
+    },
+    {
+      "id": 3,
+      "name": "Laptop Lite 13",
+      "price": 849.0
+    },
+    {
+      "id": 11,
+      "name": "Laptop Neo 13",
+      "price": 929.0
+    }
+  ],
+  "limit": 4,
+  "offset": 4,
+  "total": 12
+}

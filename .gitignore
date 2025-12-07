@@ -1,0 +1,24 @@
+# Virtual env & env file
+venv/
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Hypothesis cache
+.hypothesis/
+
+# Local DB files
+authlab.db
+*.sqlite3
+
+# Logs (runtime)
+logs/*.log
+
+# OS / IDE junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

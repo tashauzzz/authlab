@@ -1,0 +1,6 @@
+{"ts": "2025-10-13T19:28:11.119440Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_auth", "reason": "dev_api_key", "route": "/api/v1/products", "meta": null}
+{"ts": "2025-10-13T19:28:11.119950Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "sqli_surface", "reason": "param_safe", "route": "/api/v1/products", "meta": {"q": "lap"}}
+{"ts": "2025-10-13T19:28:11.120012Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_products", "reason": "list", "route": "/api/v1/products", "meta": {"q": "lap", "min": null, "max": null, "sort": "name:asc", "limit": 4, "offset": 0, "count": 4, "total": 12}}
+{"ts": "2025-10-13T19:29:41.950239Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_auth", "reason": "dev_api_key", "route": "/api/v1/products", "meta": null}
+{"ts": "2025-10-13T19:29:41.950841Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "sqli_surface", "reason": "param_safe", "route": "/api/v1/products", "meta": {"q": "lap"}}
+{"ts": "2025-10-13T19:29:41.950909Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "api_products", "reason": "list", "route": "/api/v1/products", "meta": {"q": "lap", "min": null, "max": null, "sort": "name:asc", "limit": 4, "offset": 4, "count": 4, "total": 12}}

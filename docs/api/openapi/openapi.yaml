@@ -1,0 +1,493 @@
+openapi: 3.0.3
+
+info:
+  title: AuthLab API (DEV)
+  version: "0.1.0"
+  description: >
+    DEV-only API. First call GET /api/v1/auth/session with
+    `Authorization: Bearer {{devApiKey}}` (DEV_MODE=true, APP_ENV=dev).
+    On success, the server sets a session cookie and returns a CSRF token.
+
+servers:
+  - url: http://127.0.0.1:5000
+    description: Local Flask server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: DEV bootstrap only (used on /api/v1/auth/session).
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: session
+      description: Flask session cookie set by /api/v1/auth/session.
+
+paths:
+  /api/v1/auth/session:
+    get:
+      tags: [Auth]
+      summary: Bootstrap DEV session and return CSRF token
+      description: >
+        Send `Authorization: Bearer {{devApiKey}}` in DEV. On success, the server
+        sets a session cookie and returns JSON with `csrf_token`. If a valid cookie
+        already exists, returns current user and token.
+      security:
+        - bearerAuth: []
+        - cookieAuth: []
+      responses:
+        '200':
+          description: OK — cookie set and CSRF token returned
+          headers:
+            Set-Cookie:
+              description: Flask session cookie
+              schema: { type: string }
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [user, csrf_token]
+                properties:
+                  user:
+                    type: string
+                    example: admin
+                  csrf_token:
+                    type: string
+                    example: "7d1a0b5c...f3"
+        '401':
+          description: Unauthorized (missing/wrong DEV key or no session)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:    { type: string, example: unauthorized }
+                      message: { type: string, example: Login required }
+  
+
+  /api/v1/guestbook/messages:
+    get:
+      tags: [Guestbook]
+      summary: List guestbook messages (newest first)
+      description: Requires a valid session cookie.
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: limit
+          in: query
+          description: Page size
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+        - name: offset
+          in: query
+          description: Offset into results
+          schema: { type: integer, minimum: 0, maximum: 10000, default: 0 }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items, count, total, offset, limit]
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      required: [id, ts, user, message]
+                      properties:
+                        id:      { type: integer, example: 7 }
+                        ts:      { type: string, format: date-time, example: "2025-10-20T12:34:56Z" }
+                        user:    { type: string, example: "admin" }
+                        message: { type: string, example: "hello from postman" }
+                  count:  { type: integer, example: 1 }
+                  total:  { type: integer, example: 5 }
+                  offset: { type: integer, example: 0 }
+                  limit:  { type: integer, example: 20 }
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:    { type: string, example: unauthorized }
+                      message: { type: string, example: Login required }
+
+
+    post:
+      tags: [Guestbook]
+      summary: Create a guestbook message
+      description: Requires session cookie and X-CSRF-Token header. This endpoint is rate-limited.
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: X-CSRF-Token
+          in: header
+          required: true
+          description: Must match the CSRF token issued by /api/v1/auth/session.
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [message]
+              properties:
+                message:
+                  type: string
+                  description: Message text; server may truncate to MAX_MSG_LEN.
+                  minLength: 1
+                  example: "hello from postman"
+      responses:
+        '201':
+          description: Created
+          headers:
+            Location:
+              description: URL of the created resource
+              schema: { type: string, example: "/api/v1/guestbook/messages/7" }
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [id, ts, user, message]
+                properties:
+                  id:      { type: integer, example: 7 }
+                  ts:      { type: string, format: date-time }
+                  user:    { type: string, example: "admin" }
+                  message: { type: string, example: "hello from postman" }
+        '400':
+          description: Bad request (missing/empty message or invalid CSRF token)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:    { type: string, example: empty }
+                      message: { type: string, example: Message required }
+        '401':
+          description: Unauthorized (no session)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:    { type: string, example: unauthorized }
+                      message: { type: string, example: Login required }
+        '415':
+          description: Unsupported Media Type (expected application/json)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:    { type: string, example: bad_json }
+                      message: { type: string, example: Expected application/json }
+        '429':
+          description: Too Many Requests (rate-limited)
+          headers:
+            Retry-After:
+              description: Seconds to wait before retrying
+              schema: { type: integer, minimum: 1 }
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:    { type: string, example: ratelimited }
+                      message: { type: string, example: Too many requests }
+    
+
+  /api/v1/products:
+    get:
+      tags: [Products]
+      summary: List products with filtering, sorting and pagination
+      description: Requires a valid session cookie. This endpoint is rate-limited.
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: q
+          in: query
+          description: Case-insensitive substring match on product name.
+          schema: { type: string }
+          example: lap
+        - name: min_price
+          in: query
+          description: Minimum price (inclusive).
+          schema: { type: number }
+          example: 1000
+        - name: max_price
+          in: query
+          description: Maximum price (inclusive).
+          schema: { type: number }
+          example: 1500
+        - name: limit
+          in: query
+          description: Page size.
+          schema: { type: integer, minimum: 1, maximum: 100, default: 4 }
+        - name: offset
+          in: query
+          description: Offset into results.
+          schema: { type: integer, minimum: 0, maximum: 10000, default: 0 }
+        - name: sort_by
+          in: query
+          description: Sort field.
+          schema:
+            type: string
+            enum: [id, name, price]
+            default: name
+        - name: sort_dir
+          in: query
+          description: Sort direction.
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              description: RFC 5988 pagination links (rel="prev", rel="next") when applicable.
+              schema: { type: string }
+              example: </api/v1/products?limit=4&offset=4&sort_by=name&sort_dir=asc>; rel="next"
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items, count, total, offset, limit]
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      required: [id, name, price]
+                      properties:
+                        id:    { type: integer, example: 3 }
+                        name:  { type: string,  example: "Laptop Pro 14" }
+                        price: { type: number,  example: 1299.0 }
+                  count:  { type: integer, example: 4 }
+                  total:  { type: integer, example: 18 }
+                  offset: { type: integer, example: 0 }
+                  limit:  { type: integer, example: 4 }
+        '400':
+          description: Bad parameters (invalid number or invalid range)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: string
+                        enum: [invalid_param, invalid_range]
+                        example: invalid_param
+                      message:
+                        type: string
+                        example: Bad parameter
+        '401':
+          description: Unauthorized (no session cookie)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:    { type: string, example: unauthorized }
+                      message: { type: string, example: Login required }
+        '429':
+          description: Too Many Requests (rate-limited)
+          headers:
+            Retry-After:
+              description: Seconds to wait before retrying.
+              schema: { type: integer, minimum: 1 }
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:    { type: string, example: ratelimited }
+                      message: { type: string, example: Too many requests }
+
+
+  /api/v1/notes:
+    get:
+      tags: [Notes]
+      summary: List current user's notes (owner-only)
+      description: Requires a valid session cookie. Results are limited to the authenticated user's notes. This endpoint is rate-limited.
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: limit
+          in: query
+          description: Page size.
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+        - name: offset
+          in: query
+          description: Offset into results.
+          schema: { type: integer, minimum: 0, maximum: 10000, default: 0 }
+        - name: sort_by
+          in: query
+          description: Sort field.
+          schema:
+            type: string
+            enum: [id, title]
+            default: title
+        - name: sort_dir
+          in: query
+          description: Sort direction.
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: asc
+      responses:
+        '200':
+          description: OK
+          headers:
+            Link:
+              description: RFC 5988 pagination links (rel="prev", rel="next") when applicable.
+              schema: { type: string }
+              example: </api/v1/notes?limit=20&offset=20&sort_by=title&sort_dir=asc>; rel="next"
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [items, count, total, offset, limit]
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      required: [id, title]
+                      properties:
+                        id:    { type: integer, example: 1 }
+                        title: { type: string,  example: "Admin note #1" }
+                  count:  { type: integer, example: 3 }
+                  total:  { type: integer, example: 3 }
+                  offset: { type: integer, example: 0 }
+                  limit:  { type: integer, example: 20 }
+        '401':
+          description: Unauthorized (no session cookie)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:    { type: string, example: unauthorized }
+                      message: { type: string, example: Login required }
+        '429':
+          description: Too Many Requests (rate-limited)
+          headers:
+            Retry-After:
+              description: Seconds to wait before retrying.
+              schema: { type: integer, minimum: 1 }
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:    { type: string, example: ratelimited }
+                      message: { type: string, example: Too many requests }
+
+      
+  /api/v1/notes/{id}:
+    get:
+      tags: [Notes]
+      summary: Get a single note (owner-only)
+      description: Requires a valid session cookie. Returns 404 (masked) if the note doesn't exist or belongs to another user. This endpoint is rate-limited.
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Note ID.
+          schema: { type: integer, minimum: 1 }
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [id, title, body]
+                properties:
+                  id:    { type: integer, example: 1 }
+                  title: { type: string,  example: "Admin note #1" }
+                  body:  { type: string,  example: "Seeded note 1 for admin" }
+        '404':
+          description: Not Found (masked — not existing or not owned by the user)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:    { type: string, example: not_found }
+                      message: { type: string, example: Resource not found }
+        '401':
+          description: Unauthorized (no session cookie)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:    { type: string, example: unauthorized }
+                      message: { type: string, example: Login required }
+        '429':
+          description: Too Many Requests (rate-limited)
+          headers:
+            Retry-After:
+              description: Seconds to wait before retrying.
+              schema: { type: integer, minimum: 1 }
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:    { type: string, example: ratelimited }
+                      message: { type: string, example: Too many requests }
+
+
+

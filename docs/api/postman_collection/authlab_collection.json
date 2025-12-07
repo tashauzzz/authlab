@@ -1,0 +1,215 @@
+{
+	"info": {
+		"name": "authlab collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/v1/auth/session",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {",
+							"  const body = pm.response.json();",
+							"  if (body && body.csrf_token) {",
+							"    pm.collectionVariables.set('csrf_token', body.csrf_token);",
+							"  }",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/auth/session",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"session"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/guestbook/messages",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-CSRF-Token",
+						"value": "{{csrf_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"message\": \"hello from postman\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/guestbook/messages",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"guestbook",
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/products?limit=4&offset=0&sort_by=name&sort_dir=asc",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"products"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "4"
+						},
+						{
+							"key": "offset",
+							"value": "0"
+						},
+						{
+							"key": "sort_by",
+							"value": "name"
+						},
+						{
+							"key": "sort_dir",
+							"value": "asc"
+						}	
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/notes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/notes",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"notes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/notes/{{noteId}}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/notes/{{noteId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"notes",
+						"{{noteId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{devApiKey}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://127.0.0.1:5000",
+			"description": "Local Flask server."
+		},
+		{
+			"key": "devApiKey",
+			"value": "",
+			"description": "Paste the value from .env: DEV_API_KEY. Required for GET /auth/session."
+		},
+		{
+			"key": "csrf_token",
+			"value": "",
+			"description": "Automatically populated by the /api/v1/auth/session test script. No manual action needed."
+		},
+		{
+			"key": "noteId",
+			"value": "",
+			"description": "Note ID for GET /api/v1/notes/{{noteId}} (for example, 1)."
+		}
+	]
+}

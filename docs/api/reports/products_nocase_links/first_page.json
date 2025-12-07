@@ -1,0 +1,28 @@
+{
+  "count": 4,
+  "items": [
+    {
+      "id": 2,
+      "name": "Laptop Air 13",
+      "price": 999.0
+    },
+    {
+      "id": 12,
+      "name": "Laptop Edge 14",
+      "price": 1149.0
+    },
+    {
+      "id": 6,
+      "name": "Laptop Flex 14",
+      "price": 1049.0
+    },
+    {
+      "id": 10,
+      "name": "Laptop Flex 16",
+      "price": 1399.0
+    }
+  ],
+  "limit": 4,
+  "offset": 0,
+  "total": 12
+}

@@ -1,0 +1,12 @@
+{
+  "count": 1,
+  "items": [
+    {
+      "id": 1,
+      "title": "Admin note #1"
+    }
+  ],
+  "limit": 1,
+  "offset": 0,
+  "total": 3
+}

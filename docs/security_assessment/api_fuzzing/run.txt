@@ -1,0 +1,332 @@
+Schemathesis v4.6.4
+━━━━━━━━━━━━━━━━━━━
+
+ ✅  Loaded specification from docs/api/openapi/openapi.yaml (in 0.22s)                                
+
+     Base URL:         http://127.0.0.1:5000                                                           
+     Specification:    Open API 3.0.3                                                                  
+     Operations:       6 selected / 6 total                                                            
+
+ ✅  API capabilities:                                                                                 
+
+     Supports NULL byte in headers:    ✓                                                               
+
+ ❌  Examples (in 0.18s)                                                                               
+                                                                                                       
+     ✅ 1 passed  ❌ 1 failed  ⏭  4 skipped                                                            
+
+ ❌  Coverage (in 3.47s)                                                                               
+                                                                                                       
+     ❌ 6 failed                                                                                       
+
+ ❌  Fuzzing (in 0.51s)                                                                                
+                                                                                                       
+     ✅ 1 passed  ❌ 5 failed                                                                          
+
+ ❌  Stateful (in 1.02s)                                                                               
+
+     Scenarios:    28                                                                                  
+     API Links:    0 covered / 1 selected / 1 total (1 inferred)                                       
+
+     ✅ 25 passed  ❌ 3 failed                                                                         
+
+=============================================== FAILURES ==============================================
+_________________________________________ GET /api/v1/products ________________________________________
+1. Test Case ID: EoytqN
+
+- API accepts invalid authentication
+
+    Expected 401, got `200 OK` for `GET /api/v1/products` (generated auth likely invalid)
+
+[200] OK:
+
+    `{
+      "count": 6,
+      "items": [
+        {
+          "id": 12,
+          "name": "Laptop Edge 14",
+          "price": 1149.0
+        },
+        {
+          "id": 6,
+          "name": "Laptop Flex 14",
+          "price": 1049.0
+        },
+        {
+          "id": 10,
+          "name": "Laptop Flex 16",
+          "price": 1399.0
+        },
+        {
+          "id": 7,
+          "name": "Laptop Gamer 15",
+          "price": 1499.0
+        },
+        {
+          "id": 4,
+          "name": "Laptop Pro 14",
+          "price": 1299.0
+        },
+        {
+          "id": 5,
+          "name": "Laptop Work 14",
+          "price": 109 // Output truncated...`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' -H 'Cookie: [Filtered]' 'http://127.0.0.1:5000/api/v1/products?q=lap&min_price=1000&max_price=1500'
+
+_______________________________________ GET /api/v1/auth/session ______________________________________
+1. Test Case ID: 86Zkx8
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: Missing `session` at cookie
+
+[200] OK:
+
+    `{
+      "csrf_token": "5230ac1d4e8f3f1b6f014d0f6a99ccdab018b21e6156360e192b30158ecaccd1",
+      "user": "admin"
+    }`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' http://127.0.0.1:5000/api/v1/auth/session
+
+____________________________________ GET /api/v1/guestbook/messages ___________________________________
+1. Test Case ID: FQMG0U
+
+- API accepts invalid authentication
+
+    Expected 401, got `200 OK` for `GET /api/v1/guestbook/messages` (generated auth likely invalid)
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: in query - object with unexpected properties
+
+[200] OK:
+
+    `{
+      "count": 0,
+      "items": [],
+      "limit": 20,
+      "offset": 0,
+      "total": 0
+    }`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' -H 'Cookie: [Filtered]' 'http://127.0.0.1:5000/api/v1/guestbook/messages?offset=0&x-schemathesis-unknown-property=42'
+
+__________________________________________ GET /api/v1/notes __________________________________________
+1. Test Case ID: bc7YfS
+
+- API accepts invalid authentication
+
+    Expected 401, got `200 OK` for `GET /api/v1/notes` (generated auth likely invalid)
+
+[200] OK:
+
+    `{
+      "count": 3,
+      "items": [
+        {
+          "id": 1,
+          "title": "Admin note #1"
+        },
+        {
+          "id": 2,
+          "title": "Admin note #2"
+        },
+        {
+          "id": 3,
+          "title": "Admin note #3"
+        }
+      ],
+      "limit": 20,
+      "offset": 0,
+      "total": 3
+    }`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' -H 'Cookie: [Filtered]' 'http://127.0.0.1:5000/api/v1/notes?offset=0&sort_by=id&sort_dir=asc'
+
+___________________________________ POST /api/v1/guestbook/messages ___________________________________
+1. Test Case ID: rHTP53
+
+- Missing header not rejected
+
+    Got 400 when missing required 'X-CSRF-Token' header, expected 406
+
+[400] Bad Request:
+
+    `{
+      "error": {
+        "code": "csrf_bad",
+        "message": "Invalid CSRF token"
+      }
+    }`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'Content-Type: application/json' -H 'Cookie: [Filtered]' -d '{"message": "hello from postman"}' http://127.0.0.1:5000/api/v1/guestbook/messages
+
+2. Test Case ID: OBgQnp
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 5xx
+
+[400] Bad Request:
+
+    `{
+      "error": {
+        "code": "csrf_bad",
+        "message": "Invalid CSRF token"
+      }
+    }`
+
+Reproduce with: 
+
+    curl -X POST -H 'Authorization: [Filtered]' -H 'X-CSRF-Token: [Filtered]' -H 'Content-Type: application/json' -H 'Cookie: [Filtered]' -d '{"message": "0"}' http://127.0.0.1:5000/api/v1/guestbook/messages
+
+________________________________________ GET /api/v1/notes/{id} _______________________________________
+1. Test Case ID: qftgB1
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: Missing `session` at cookie
+
+[200] OK:
+
+    `{
+      "body": "Seeded note 1 for admin",
+      "id": 1,
+      "title": "Admin note #1"
+    }`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' http://127.0.0.1:5000/api/v1/notes/1
+
+2. Test Case ID: 9fwVKH
+
+- API accepts invalid authentication
+
+    Expected 401, got `200 OK` for `GET /api/v1/notes/{id}` (generated auth likely invalid)
+
+[200] OK:
+
+    `{
+      "body": "Seeded note 1 for admin",
+      "id": 1,
+      "title": "Admin note #1"
+    }`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' -H 'Cookie: [Filtered]' http://127.0.0.1:5000/api/v1/notes/1
+
+____________________________________________ Stateful tests ___________________________________________
+1. Test Case ID: NcLTyU
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: in query - violates `additionalProperties` (False)
+
+[200] OK:
+
+    `{
+      "count": 1,
+      "items": [
+        {
+          "id": 1,
+          "title": "Admin note #1"
+        }
+      ],
+      "limit": 1,
+      "offset": 0,
+      "total": 3
+    }`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' -H 'Cookie: [Filtered]' 'http://127.0.0.1:5000/api/v1/notes?limit=0'
+
+2. Test Case ID: kKbuuk
+
+- API accepted schema-violating request
+
+    Invalid data should have been rejected
+    Expected: 400, 401, 403, 404, 406, 422, 428, 5xx
+    Invalid component: in query - violates `additionalProperties` (False)
+
+[429] Too Many Requests:
+
+    `{
+      "error": {
+        "code": "ratelimited",
+        "message": "Too many requests"
+      }
+    }`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' -H 'Cookie: [Filtered]' 'http://127.0.0.1:5000/api/v1/notes?limit=0'
+
+3. Test Case ID: Md7Wcb
+
+- API rejected schema-compliant request
+
+    Valid data should have been accepted
+    Expected: 2xx, 401, 403, 404, 5xx
+
+[429] Too Many Requests:
+
+    `{
+      "error": {
+        "code": "ratelimited",
+        "message": "Too many requests"
+      }
+    }`
+
+Reproduce with: 
+
+    curl -X GET -H 'Authorization: [Filtered]' -H 'Cookie: [Filtered]' 'http://127.0.0.1:5000/api/v1/notes?offset=7014&sort_dir=asc&limit=97&sort_by=title'
+
+=============================================== SUMMARY ===============================================
+
+API Operations:
+  Selected: 6/6
+  Tested: 6
+
+Test Phases:
+  ❌ Examples
+  ❌ Coverage
+  ❌ Fuzzing
+  ❌ Stateful
+
+Failures:
+  ❌ API accepts invalid authentication: 4
+  ❌ API accepted schema-violating request: 5
+  ❌ API rejected schema-compliant request: 2
+  ❌ Missing header not rejected: 1
+
+Test cases:
+  241 generated, 11 found 12 unique failures, 66 skipped
+
+Seed: 306989517867519250962779982007791055896
+
+========================================= 12 failures in 5.23s ========================================

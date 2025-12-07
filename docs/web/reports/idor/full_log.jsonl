@@ -1,0 +1,9 @@
+{"ts": "2025-10-22T15:37:11.753053Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "mfa_required", "reason": "-", "route": "/login", "meta": null}
+{"ts": "2025-10-22T15:37:29.549216Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "success", "reason": "mfa_ok", "route": "/mfa", "meta": null}
+{"ts": "2025-10-22T15:37:32.002054Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "idor_surface", "reason": "index_poc", "route": "/notes", "meta": {"count": 3}}
+{"ts": "2025-10-22T15:38:05.575715Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "idor_surface", "reason": "no_owner_check", "route": "/note/4", "meta": {"note_id": 4, "owner": "alice"}}
+{"ts": "2025-10-22T15:38:40.325945Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "idor_surface", "reason": "index_poc", "route": "/notes", "meta": {"count": 3}}
+{"ts": "2025-10-22T15:40:37.393795Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "mfa_required", "reason": "-", "route": "/login", "meta": null}
+{"ts": "2025-10-22T15:40:50.625112Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "success", "reason": "mfa_ok", "route": "/mfa", "meta": null}
+{"ts": "2025-10-22T15:40:52.662613Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "idor_surface", "reason": "index_safe", "route": "/notes", "meta": {"count": 3}}
+{"ts": "2025-10-22T15:41:24.240927Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "idor_surface", "reason": "blocked_404", "route": "/note/4", "meta": {"note_id": 4}}

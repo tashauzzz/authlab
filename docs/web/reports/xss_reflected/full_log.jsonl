@@ -1,0 +1,8 @@
+{"ts": "2025-10-15T14:53:48.652375Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "mfa_required", "reason": "-", "route": "/login", "meta": null}
+{"ts": "2025-10-15T14:54:04.615603Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "success", "reason": "mfa_ok", "route": "/mfa", "meta": null}
+{"ts": "2025-10-15T14:54:16.636531Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "xss_surface", "reason": "reflected_poc", "route": "/search", "meta": {"q": ""}}
+{"ts": "2025-10-15T14:55:02.986890Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "xss_surface", "reason": "reflected_poc", "route": "/search", "meta": {"q": "<script>alert('1')</script>"}}
+{"ts": "2025-10-15T14:56:10.088226Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "mfa_required", "reason": "-", "route": "/login", "meta": null}
+{"ts": "2025-10-15T14:56:27.206336Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "success", "reason": "mfa_ok", "route": "/mfa", "meta": null}
+{"ts": "2025-10-15T14:56:34.003279Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "xss_surface", "reason": "reflected_safe", "route": "/search", "meta": {"q": ""}}
+{"ts": "2025-10-15T14:57:52.170435Z", "ip": "127.0.0.1", "username": "admin", "user_exists": true, "result": "xss_surface", "reason": "reflected_safe", "route": "/search", "meta": {"q": "<script>alert('1')<script>"}}
